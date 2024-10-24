@@ -3,27 +3,20 @@ spring:
     name: task-tracker-scheduler
 
   datasource:
-    url: jdbc:postgresql://localhost:5434/task_tracker
-    username: task_tracker_service
-    password: qweasd123
+    url: jdbc:postgresql://database:5432/task_tracker
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: broker:29092
     email-sending-tasks-topic: EMAIL_SENDING_TASKS
-
-logging:
-  level:
-    root: INFO
-  file:
-    name: task-tracker-scheduler.log
-    path: /
 server:
   port: 8082
